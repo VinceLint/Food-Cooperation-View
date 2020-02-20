@@ -1,5 +1,5 @@
 <template>
-  <!--<div>-->
+  <div>
   <!--<div>-->
   <!--<div></div>-->
   <!--<div>-->
@@ -63,7 +63,10 @@
 
     </el-menu>
   </el-col>
-  <!--</div>-->
+    <el-col>
+      <router-view></router-view>
+    </el-col>
+  </div>
 </template>
 
 <script>
