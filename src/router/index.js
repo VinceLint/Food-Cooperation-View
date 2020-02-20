@@ -10,7 +10,7 @@ import Message from '../components/Message'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/food',

@@ -39,26 +39,20 @@
       @open="handleOpen"
       @close="handleClose"
     >
-      <!--<el-submenu index="1">-->
-      <!--&lt;!&ndash;<template slot="title">&ndash;&gt;-->
-      <!--<i class="el-icon-location"></i>-->
-      <!--<span><router-link to="/">首&nbsp&nbsp&nbsp&nbsp&nbsp页</router-link></span>-->
-      <!--&lt;!&ndash;</template>&ndash;&gt;-->
-      <!--</el-submenu>-->
         <el-menu-item-group>
-          <el-menu-item key="1" index="/food/message">
+          <el-menu-item key="1" index="message">
             <i class="el-icon-location">erwr</i>
             <!--<span><router-link to="/">首&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp页</router-link></span>-->
           </el-menu-item>
-          <el-menu-item key="2" index="/food/message">
+          <el-menu-item key="2" index="message">
             <i class="el-icon-menu">werwr</i>
             <!--<span><router-link to="/message">寻求合作</router-link></span>-->
           </el-menu-item>
-          <el-menu-item key="3" index="/food/cooperation">
+          <el-menu-item key="3" index="cooperation">
             <i class="el-icon-document"></i>
             <!--<span><router-link to="/cooperation">我的合作</router-link></span>-->
           </el-menu-item>
-          <el-menu-item key="4" index="/food/user">
+          <el-menu-item key="4" index="user">
             <!--<template slot="title">-->
             <i class="el-icon-setting">123</i>
             <!--</template>-->
