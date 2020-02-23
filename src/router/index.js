@@ -6,11 +6,14 @@ import Home from '../components/Home'
 import UserInfo from '../components/UserInfo'
 import Cooperation from '../components/Cooperation'
 import Message from '../components/Message'
+import Login from '../components/Login'
+import ForgetPwd from '../components/ForgetPwd'
+import Register from '../components/Register'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'hash',
+  mode: 'history',
   routes: [
     {
       path: '/food',
@@ -19,7 +22,7 @@ export default new Router({
       redirect: '/food',
       children: [
         {
-          path: 'user',
+          path: 'userInfo',
           name: 'UserInfo',
           component: UserInfo
         },
@@ -37,28 +40,23 @@ export default new Router({
           path: 'message',
           name: 'Message',
           component: Message
-        },
+        }
       ]
     },
-    // {
-    //   path: '/food/user',
-    //   name: 'UserInfo',
-    //   component: UserInfo
-    // },
-    // {
-    //   path: '/food/home',
-    //   name: 'Home',
-    //   component: Home
-    // },
-    // {
-    //   path: '/food/cooperation',
-    //   name: 'Cooperation',
-    //   component: Cooperation
-    // },
-    // {
-    //   path: '/food/message',
-    //   name: 'Message',
-    //   component: Message
-    // }
+    {
+      path: '/user/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
+      path: '/user/register',
+      name: 'Register',
+      component: Register,
+    },
+    {
+      path: '/user/forgetPwd',
+      name: 'ForgetPwd',
+      component: ForgetPwd,
+    },
   ]
 })

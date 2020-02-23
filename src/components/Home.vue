@@ -1,5 +1,5 @@
 <template>
-
+  <div><h1 class="title">Welecome to food cooperation platform</h1></div>
 </template>
 
 <script>
@@ -9,5 +9,7 @@
 </script>
 
 <style scoped>
-
+  .title {
+    margin-top: auto;
+  }
 </style>

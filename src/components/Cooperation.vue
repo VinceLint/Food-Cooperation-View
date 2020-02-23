@@ -1,10 +1,12 @@
 <template>
 
+
 </template>
 
 <script>
   export default {
-    name: 'Cooperation'
+    name: 'Cooperation',
+
   }
 </script>
 

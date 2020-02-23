@@ -1,18 +1,21 @@
 <template>
   <div id="login" class="login-container" visible="true">
-    <el-form ref="loginReq" class="login-page">
+    <el-form ref="registerReq" class="login-page">
       <el-form-item prop="username">用户名
-        <el-input v-model="loginReq.username"></el-input>
+        <el-input v-model="registerReq.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">密&nbsp&nbsp码
-        <el-input v-model="loginReq.password"></el-input>
+        <el-input v-model="registerReq.password"></el-input>
       </el-form-item>
-      <el-form-item>
-        <el-link target="_blank" class="forgetPwd-item" @click="forgetPwd">忘记密码？</el-link>
+      <el-form-item prop="password">邮&nbsp&nbsp箱
+        <el-input v-model="registerReq.email"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">手&nbsp&nbsp机
+        <el-input v-model="registerReq.phone"></el-input>
       </el-form-item>
       <el-form-item class="button-item">
-        <el-button @click="login">登 陆</el-button>
         <el-button @click="register">注 册</el-button>
+        <el-button @click="cancel">取 消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -20,28 +23,28 @@
 
 <script>
   export default {
-    name: 'login',
+    name: 'Register',
     data () {
       return {
-        token: null,
-        loginReq: {
+        registerReq: {
           username: null,
           password: null,
-        }
+          email: null,
+          phone: null,
+        },
       }
     },
     methods: {
-      login () {
+      register () {
         const _ts = this
-        this.axios.post('session/user/login', this.loginReq)
+        this.axios.post('session/user/register', this.registerReq)
           .then(function (response) {
             console.log(response.data.status)
             if (response.data.status == 1001) {
               console.log('response token: ' + response.data.data.token)
-              _ts.token = response.data.data.token
-              _ts.loginSuccess()
-            }else{
-              alert(response.data.message);
+              _ts.registerSuccess()
+            } else {
+              alert(response.data.message)
             }
           })
           .catch(function (error) {
@@ -51,23 +54,17 @@
             alert(error.data.errors[0].defaultMessage)
           })
       },
-      // 登陆成功
-      loginSuccess () {
-        console.log('this.token = ' + this.token)
-        this.cookie.set('token', this.token)
-        this.$router.push('/food/home')
+      registerSuccess () {
+        this.$router.push('/user/login')
       },
-      // 注册
-      register () {
-        this.$router.push('/user/register')
-      },
-      // 忘记密码
-      forgetPwd () {
-        this.$router.push('/user/forgetPwd')
+      cancel () {
+        this.$router.push("/food/home")
       }
     }
+
   }
 </script>
+
 <style scoped>
   .login-container {
     width: 100%;
