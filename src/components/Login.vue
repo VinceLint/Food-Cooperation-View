@@ -33,7 +33,7 @@
     methods: {
       login () {
         const _ts = this
-        this.axios.post('session/user/login', this.loginReq)
+        this.axios.post('user-session/user/login', this.loginReq)
           .then(function (response) {
             console.log(response.data.status)
             if (response.data.status == 1001) {
