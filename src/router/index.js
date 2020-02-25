@@ -10,6 +10,7 @@ import Login from '../components/Login'
 import ForgetPwd from '../components/ForgetPwd'
 import Register from '../components/Register'
 import Publish from '../components/Publish'
+import MessageDetail from '../components/MessageDetail'
 
 Vue.use(Router)
 
@@ -46,6 +47,11 @@ export default new Router({
           path: 'publish',
           name: 'Publish',
           component: Publish
+        },
+        {
+          path: 'messageDetail',
+          name: 'MessageDetail',
+          component: MessageDetail
         }
       ]
     },
