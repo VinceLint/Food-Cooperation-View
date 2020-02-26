@@ -52,6 +52,7 @@
             publishTime: null,
             publishTimeStr: null,
             detail: null,
+            userId: null,
           }],
         },
       }
@@ -87,13 +88,16 @@
             console.log('出错啦')
             console.log(error)
             // 根据返回error打的，有点乱
-            alert(error.data.errors[0].defaultMessage)
+            // alert(error.data.errors[0].defaultMessage)
           })
       },
       detail (row) {
         this.$router.push({
           path: '/food/messageDetail',
-          query: {id: row.id}
+          query: {
+            id: row.id,
+            userId: row.userId,
+          }
         })
       },
       // --------------------页码编辑----------------------------
