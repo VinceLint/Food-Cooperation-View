@@ -14,16 +14,19 @@
         @close="handleClose"
       >
         <el-menu-item-group>
-          <el-menu-item key="1" index="home">
+          <el-menu-item key="1" index="/food/home">
             <i class="el-icon-location">首&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp页</i>
           </el-menu-item>
-          <el-menu-item key="2" index="message">
+          <el-menu-item key="2" index="/food/message">
             <i class="el-icon-menu">寻求合作</i>
           </el-menu-item>
-          <el-menu-item key="3" index="cooperation">
+          <el-menu-item key="3" index="/food/release">
+            <i class="el-icon-document">我的发布</i>
+          </el-menu-item>
+          <el-menu-item key="4" index="/food/cooperation">
             <i class="el-icon-document">我的合作</i>
           </el-menu-item>
-          <el-menu-item key="4" index="userInfo">
+          <el-menu-item key="5" index="/food/userInfo">
             <i class="el-icon-setting">个人中心</i>
           </el-menu-item>
         </el-menu-item-group>
