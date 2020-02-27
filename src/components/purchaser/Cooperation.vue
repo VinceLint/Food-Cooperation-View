@@ -21,15 +21,11 @@
     },
     methods: {
       handleClick (val) {
-        // console.log(val);
-        // console.log(this.activeName)
-        // console.log(this.$route.path)
         this.$router.push(this.activeName)
       },
     },
 
     created () {
-      // window.location.reload();
       this.activeName = this.$route.path
     },
     mounted(){

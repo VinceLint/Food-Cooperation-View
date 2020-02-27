@@ -16,6 +16,10 @@ import Register from '../components/Register'
 import Publish from '../components/Publish'
 import MessageDetail from '../components/MessageDetail'
 import Release from '../components/boss/Release'
+import Wait from '../components/boss/Wait'
+import During from '../components/boss/During'
+import End from '../components/boss/End'
+import Reject from '../components/boss/Reject'
 
 
 Vue.use(Router)
@@ -42,7 +46,30 @@ export default new Router({
         {
           path: 'release',
           name: 'Release',
-          component: Release
+          component: Release,
+          redirect: '/food/release/wait',
+          children: [
+            {
+              path: '/food/release/wait',
+              name: 'Wait',
+              component: Wait,
+            },
+            {
+              path: '/food/release/during',
+              name: 'During',
+              component: During,
+            },
+            {
+              path: '/food/release/reject',
+              name: 'Reject',
+              component: Reject,
+            },
+            {
+              path: '/food/release/end',
+              name: 'End',
+              component: End,
+            },
+          ]
         },
         {
           path: 'cooperation',

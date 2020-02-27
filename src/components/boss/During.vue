@@ -32,7 +32,7 @@
 
 <script>
   export default {
-    name: 'On',
+    name: 'During',
     data () {
       return {
         requestRes: {
@@ -59,7 +59,7 @@
       },
       requestData (page, pageSize) {
         const _ts = this
-        this.axios.get('user-cooperation/purchaser/seek',
+        this.axios.get('user-cooperation/boss/seek',
           {
             params: {
               page: page,
