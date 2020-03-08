@@ -3,12 +3,11 @@
     <div class="table-contain">
       <el-table :data="requestRes.details" show-overflow-tooltip
                 style="width: 80%; minHeight: 500px; margin-left: 100px">
-        <el-table-column prop="id" label="id" v-if="false"></el-table-column>
-        <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="company" label="单位" width="200px"></el-table-column>
-        <el-table-column prop="province" label="省份" width="50px"></el-table-column>
-        <el-table-column prop="city" label="城市" width="70px"></el-table-column>
-        <el-table-column prop="publishTimeStr" label="发布时间"></el-table-column>
+        <el-table-column prop="cooperationId" label="合作号"></el-table-column>
+        <el-table-column prop="cooperationVO.title" label="标题"></el-table-column>
+        <el-table-column prop="user.id" label="申请人ID"></el-table-column>
+        <el-table-column prop="user.username" label="申请人"></el-table-column>
+        <el-table-column prop="user.score" label="申请人评分"></el-table-column>
       </el-table>
     </div>
     <div class="pagination-container">
@@ -52,6 +51,10 @@
             userId: null,
           }],
         },
+        applyPassReq: {
+          cooperationId: null,
+          cooperatorId: null,
+        }
       }
     },
     methods: {
@@ -64,7 +67,8 @@
             params: {
               page: page,
               pageSize: pageSize,
-              status: 3,
+              status: 2,
+              applyStatus: 2,
             }
           })
           .then(function (response) {

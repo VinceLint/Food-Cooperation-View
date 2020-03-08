@@ -3,12 +3,17 @@
     <div class="table-contain">
       <el-table :data="requestRes.details" show-overflow-tooltip
                 style="width: 80%; minHeight: 500px; margin-left: 100px">
-        <el-table-column prop="id" label="id" v-if="false"></el-table-column>
-        <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="company" label="单位" width="200px"></el-table-column>
-        <el-table-column prop="province" label="省份" width="50px"></el-table-column>
-        <el-table-column prop="city" label="城市" width="70px"></el-table-column>
-        <el-table-column prop="publishTimeStr" label="发布时间"></el-table-column>
+        <el-table-column prop="cooperationId" label="合作号"></el-table-column>
+        <el-table-column prop="cooperationVO.title" label="标题"></el-table-column>
+        <el-table-column prop="user.id" label="申请人ID"></el-table-column>
+        <el-table-column prop="user.username" label="申请人"></el-table-column>
+        <el-table-column prop="user.score" label="申请人评分"></el-table-column>
+        <el-table-column label="操作" width="200px">
+          <template slot-scope="scope">
+            <el-button @click="pass(scope.$index)" icon="el-icon-setting" type="primary">通过</el-button>
+            <el-button @click="notPass(scope.$index)" icon="el-icon-setting" type="danger">拒绝</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <div class="pagination-container">
@@ -52,6 +57,10 @@
             userId: null,
           }],
         },
+        applyPassReq: {
+          cooperationId: null,
+          cooperatorId: null,
+        }
       }
     },
     methods: {
@@ -65,6 +74,7 @@
               page: page,
               pageSize: pageSize,
               status: 0,
+              applyStatus: 0,
             }
           })
           .then(function (response) {
@@ -82,6 +92,28 @@
             console.log('出错啦')
             console.log(error)
           })
+      },
+      pass(row){
+        this.applyPassReq = {}
+        this.applyPassReq.cooperationId = this.requestRes.details[row].cooperationId;
+        this.applyPassReq.cooperatorId = this.requestRes.details[row].cooperatorId;
+        const _ts = this
+        this.axios.post('user-cooperation/boss/pass', this.applyPassReq)
+          .then(function (response) {
+            console.log(response.data.status)
+            if (response.data.status == 1001) {
+              _ts.requestData(1, 20)
+            }else{
+              alert(response.data.message);
+            }
+          })
+          .catch(function (error) {
+            console.log('出错啦')
+            console.log(error)
+          })
+      },
+      notPass(row){
+
       },
       // --------------------页码编辑----------------------------
       handleSizeChange (val) {
