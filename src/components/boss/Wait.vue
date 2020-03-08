@@ -32,6 +32,42 @@
       >
       </el-pagination>
     </div>
+    <el-dialog :visible.sync="dialogVisible">
+      <el-form :inline="true">
+        <el-row>
+          <el-form-item label="申请号: ">
+            {{applyRejectReq.cooperationId}}
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="标题:">
+            {{form.cooperationTitle}}
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="申请人ID:">
+            {{applyRejectReq.cooperatorId}}
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="申请人:">
+            {{form.cooperatorName}}
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="拒绝理由:">
+            <el-input type="textarea" :rows="8" style="width: 400px;" v-model="applyRejectReq.comment">
+            </el-input>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item>
+            <el-button @click="submitReject" type="danger">拒 绝</el-button>
+            <el-button @click="dialogVisible=false">取 消</el-button>
+          </el-form-item>
+        </el-row>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -40,6 +76,7 @@
     name: 'Wait',
     data () {
       return {
+        dialogVisible: false,
         requestRes: {
           page: 1,
           total: 100,
@@ -55,11 +92,23 @@
             publishTimeStr: null,
             detail: null,
             userId: null,
+            cooperationVO: {},
           }],
         },
         applyPassReq: {
           cooperationId: null,
           cooperatorId: null,
+        },
+        form: {
+          cooperationId: null,
+          cooperationTitle: null,
+          cooperatorId: null,
+          cooperatorName: null,
+        },
+        applyRejectReq: {
+          cooperationId: null,
+          cooperatorId: null,
+          comment: null,
         }
       }
     },
@@ -93,18 +142,18 @@
             console.log(error)
           })
       },
-      pass(row){
+      pass (row) {
         this.applyPassReq = {}
-        this.applyPassReq.cooperationId = this.requestRes.details[row].cooperationId;
-        this.applyPassReq.cooperatorId = this.requestRes.details[row].cooperatorId;
+        this.applyPassReq.cooperationId = this.requestRes.details[row].cooperationId
+        this.applyPassReq.cooperatorId = this.requestRes.details[row].cooperatorId
         const _ts = this
         this.axios.post('user-cooperation/boss/pass', this.applyPassReq)
           .then(function (response) {
             console.log(response.data.status)
             if (response.data.status == 1001) {
               _ts.requestData(1, 20)
-            }else{
-              alert(response.data.message);
+            } else {
+              alert(response.data.message)
             }
           })
           .catch(function (error) {
@@ -112,8 +161,33 @@
             console.log(error)
           })
       },
-      notPass(row){
-
+      notPass (row) {
+        this.applyRejectReq.cooperationId = this.requestRes.details[row].cooperationId
+        this.form.cooperationTitle = this.requestRes.details[row].cooperationVO.title
+        this.applyRejectReq.cooperatorId = this.requestRes.details[row].cooperatorId
+        this.form.cooperatorName = this.requestRes.details[row].user.username
+        this.applyRejectReq.comment = ''
+        this.dialogVisible = true
+        console.log(this.dialogVisible)
+        console.log(row)
+      },
+      submitReject () {
+        const _ts = this
+        this.axios.post('user-cooperation/boss/reject', this.applyRejectReq)
+          .then(function (response) {
+            console.log(response.data.status)
+            if (response.data.status == 1001) {
+              _ts.dialogVisible = false;
+              _ts.requestData(1, 20)
+            } else {
+              alert(response.data.message)
+            }
+          })
+          .catch(function (error) {
+            console.log('出错啦')
+            console.log(error)
+            alert(error)
+          })
       },
       // --------------------页码编辑----------------------------
       handleSizeChange (val) {

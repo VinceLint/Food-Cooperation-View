@@ -67,7 +67,7 @@
             params: {
               page: page,
               pageSize: pageSize,
-              status: 2,
+              status: null,
               applyStatus: 2,
             }
           })
