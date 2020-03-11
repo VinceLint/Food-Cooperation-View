@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="table-contain">
-      <el-table :data="requestRes.details" @row-click="getDetail" show-overflow-tooltip
+      <el-table :data="requestRes.details" show-overflow-tooltip
                 style="width: 80%; minHeight: 500px; margin-left: 100px">
         <el-table-column prop="cooperationId" label="合作号"></el-table-column>
         <el-table-column prop="cooperationVO.title" label="标题"></el-table-column>
@@ -26,87 +26,14 @@
       >
       </el-pagination>
     </div>
-    <el-dialog :visible.sync="dialogVisible" width="50%">
-      <div style="overflow: scroll">
-        <el-row>
-          <el-col :span="12">
-            <el-row>
-              <span>采购员:</span>
-              <span>{{detail.user.username}}</span>
-            </el-row>
-          </el-col>
-          <el-col :span="12">
-            <el-row>
-              <span>他的信用:</span>
-              <span>{{detail.user.score}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="4">
-            <span>&nbsp</span>
-          </el-col>
-          <el-col :span="16">
-            <el-card>
-              <div slot="header">
-                <span>我的评价</span>
-              </div>
-              <div>
-                {{detail.comment}}
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <span>&nbsp
-            </span>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            <el-row>
-              <span>我的评分:</span>
-              <span>{{detail.score}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="4">
-            <span>&nbsp</span>
-          </el-col>
-          <el-col :span="16">
-            <el-card>
-              <div slot="header">
-                <span>他的评价</span>
-              </div>
-              <div>
-                {{detail.cooperationVO.comment}}
-              </div>
-            </el-card>
-          </el-col>
-          <el-col :span="4">
-            <span>&nbsp
-            </span>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            <el-row>
-              <span>他的评分:</span>
-              <span>{{detail.cooperationVO.score}}</span>
-            </el-row>
-          </el-col>
-        </el-row>
-      </div>
-    </el-dialog>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Reject',
+    name: 'AdvanceEnd',
     data () {
       return {
-        dialogVisible: false,
         requestRes: {
           page: 1,
           total: 100,
@@ -124,26 +51,6 @@
             userId: null,
           }],
         },
-        detail: {
-          id: null,
-          title: null,
-          company: null,
-          province: null,
-          city: null,
-          publishTime: null,
-          publishTimeStr: null,
-          detail: null,
-          comment: null,
-          userId: null,
-          user: {
-            username: null,
-            score: null,
-          },
-          cooperationVO: {
-            comment: null,
-            score: null,
-          }
-        },
         applyPassReq: {
           cooperationId: null,
           cooperatorId: null,
@@ -160,7 +67,7 @@
             params: {
               page: page,
               pageSize: pageSize,
-              status: 2,
+              status: 3,
               applyStatus: null,
             }
           })
@@ -180,10 +87,6 @@
             console.log(error)
           })
       },
-      getDetail(row){
-        this.detail = row;
-        this.dialogVisible = true;
-      },
       // --------------------页码编辑----------------------------
       handleSizeChange (val) {
         this.requestData(1, val)
@@ -201,4 +104,5 @@
 </script>
 
 <style scoped>
+
 </style>

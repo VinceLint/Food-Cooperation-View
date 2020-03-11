@@ -20,6 +20,7 @@ import Wait from '../components/boss/Wait'
 import During from '../components/boss/During'
 import End from '../components/boss/End'
 import Reject from '../components/boss/Reject'
+import AdvanceEnd from '../components/boss/AdvanceEnd'
 
 
 Vue.use(Router)
@@ -63,6 +64,11 @@ export default new Router({
               path: '/food/release/reject',
               name: 'Reject',
               component: Reject,
+            },
+            {
+              path: '/food/release/advanceEnd',
+              name: 'AdvanceEnd',
+              component: AdvanceEnd,
             },
             {
               path: '/food/release/end',
