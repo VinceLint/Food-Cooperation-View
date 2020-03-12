@@ -1,14 +1,18 @@
 <template>
   <div>
     <div class="table-contain">
-      <el-table :data="requestRes.details" show-overflow-tooltip
-                style="width: 80%; minHeight: 500px; margin-left: 100px">
-        <el-table-column prop="id" label="id" v-if="false"></el-table-column>
-        <el-table-column prop="title" label="标题"></el-table-column>
-        <el-table-column prop="company" label="单位" width="200px"></el-table-column>
+      <el-table :data="requestRes.details" show-overflow-tooltip style="width: 100%; minHeight: 500px;">
+        <el-table-column prop="id" label="id"></el-table-column>
+        <el-table-column prop="title" label="标题" width="150px"></el-table-column>
+        <el-table-column prop="company" label="单位" width="150px"></el-table-column>
         <el-table-column prop="province" label="省份" width="50px"></el-table-column>
         <el-table-column prop="city" label="城市" width="70px"></el-table-column>
-        <el-table-column prop="publishTimeStr" label="发布时间"></el-table-column>
+        <el-table-column prop="publishTimeStr" label="发布时间" width="200px"></el-table-column>
+        <el-table-column label="理由" width="200px">
+          <template slot-scope="scope">
+            <el-button @click="overviewReason(scope.$index)" type="danger">查 看</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <div class="pagination-container">
@@ -27,6 +31,15 @@
       >
       </el-pagination>
     </div>
+    <el-dialog :visible.sync="dialogVisible" width="50%">
+      <div>
+        理由：
+      </div>
+      <div>
+        {{reason}}
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
@@ -35,6 +48,7 @@
     name: 'Refuse',
     data () {
       return {
+        dialogVisible: false,
         requestRes: {
           page: 1,
           total: 100,
@@ -52,6 +66,7 @@
             userId: null,
           }],
         },
+        reason: null,
       }
     },
     methods: {
@@ -64,7 +79,8 @@
             params: {
               page: page,
               pageSize: pageSize,
-              status: 3,
+              applyStatus: 2,
+              status: null,
             }
           })
           .then(function (response) {
@@ -74,6 +90,7 @@
               _ts.requestRes.page = response.data.data.page
               _ts.requestRes.total = response.data.data.total
               _ts.requestRes.limit = response.data.data.limit
+              _ts.requestRes.pageSize = response.data.data.pageSize
             } else {
               alert(response.data.message)
             }
@@ -81,7 +98,14 @@
           .catch(function (error) {
             console.log('出错啦')
             console.log(error)
+            // 根据返回error打的，有点乱
+            // alert(error.data.errors[0].defaultMessage)
           })
+      },
+      overviewReason (row) {
+        console.log(this.requestRes.details[row])
+        this.dialogVisible = true
+        console.log(this.dialogVisible)
       },
       // --------------------页码编辑----------------------------
       handleSizeChange (val) {
@@ -100,5 +124,14 @@
 </script>
 
 <style scoped>
+  .table-contain {
+    margin-top: 20px;
+    width: 70%;
+    display: inline-block;
+  }
 
+  .pagination-container {
+    margin-top: 20px;
+    /*text-align: center;*/
+  }
 </style>

@@ -6,6 +6,7 @@ import Home from '../components/Home'
 import UserInfo from '../components/UserInfo'
 import Cooperation from '../components/purchaser/Cooperation'
 import Seek from '../components/purchaser/Seek'
+import SeekDetail from '../components/purchaser/SeekDetail'
 import On from '../components/purchaser/On'
 import Refuse from '../components/purchaser/Refuse'
 import Finish from '../components/purchaser/Finish'
@@ -87,6 +88,11 @@ export default new Router({
               path: '/food/cooperation/seek',
               name: 'Seek',
               component: Seek,
+            },
+            {
+              path: '/food/cooperation/seekDetail',
+              name: 'SeekDetail',
+              component: SeekDetail,
             },
             {
               path: '/food/cooperation/on',
