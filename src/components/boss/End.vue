@@ -103,7 +103,7 @@
 
 <script>
   export default {
-    name: 'Reject',
+    name: 'End',
     data () {
       return {
         dialogVisible: false,

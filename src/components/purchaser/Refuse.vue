@@ -36,7 +36,7 @@
         理由：
       </div>
       <div>
-        {{reason}}
+        {{reason==null?'暂无':reason}}
       </div>
     </el-dialog>
 
