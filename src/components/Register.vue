@@ -5,7 +5,7 @@
         <el-input v-model="registerReq.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">密&nbsp&nbsp码
-        <el-input v-model="registerReq.password"></el-input>
+        <el-input type="password" v-model="registerReq.password"></el-input>
       </el-form-item>
       <el-form-item prop="password">邮&nbsp&nbsp箱
         <el-input v-model="registerReq.email"></el-input>
@@ -52,7 +52,6 @@
           })
           .catch(function (error) {
             console.log('出错啦')
-            console.log(error)
           })
       },
       registerSuccess () {
