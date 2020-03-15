@@ -1,20 +1,22 @@
 <template>
-  <div id="login" class="login-container" visible="true">
-    <el-form ref="loginReq" class="login-page">
-      <el-form-item prop="username">用户名
-        <el-input v-model="loginReq.username"></el-input>
-      </el-form-item>
-      <el-form-item prop="password">密&nbsp&nbsp码
-        <el-input v-model="loginReq.password"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-link target="_blank" class="forgetPwd-item" @click="forgetPwd">忘记密码？</el-link>
-      </el-form-item>
-      <el-form-item class="button-item">
-        <el-button @click="login">登 陆</el-button>
-        <el-button @click="register">注 册</el-button>
-      </el-form-item>
-    </el-form>
+  <div>
+    <div id="login" class="login-container" visible="true">
+      <el-form ref="loginReq" class="login-page">
+        <el-form-item prop="username">用户名
+          <el-input v-model="loginReq.username"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">密&nbsp&nbsp码
+          <el-input type="password" v-model="loginReq.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-link target="_blank" class="forgetPwd-item" @click="forgetPwd">忘记密码？</el-link>
+        </el-form-item>
+        <el-form-item class="button-item">
+          <el-button @click="login" type="primary">登 陆</el-button>
+          <el-button @click="register">注 册</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -40,15 +42,14 @@
               console.log('response token: ' + response.data.data.token)
               _ts.token = response.data.data.token
               _ts.loginSuccess()
-            }else{
-              alert(response.data.message);
+            } else {
+              alert(response.data.message)
             }
           })
           .catch(function (error) {
             console.log('出错啦')
             console.log(error)
             // 根据返回error打的，有点乱
-            alert(error.data.errors[0].defaultMessage)
           })
       },
       // 登陆成功

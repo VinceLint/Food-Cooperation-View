@@ -35,11 +35,16 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
-    if (response.data.resultCode=="404") {
-      console.log("response.data.resultCode是404")
+    console.log(response.status)
+    if (response.data.status==1002) {
       // 返回 错误代码-1 清除ticket信息并跳转到登录页面
       cookie.delete("token");
       console.log("登陆信息失效")
+      this.$message({
+        type: 'error',
+        message: '登陆信息失效，请重新登陆',
+        duration: 3000,
+      })
       this.$router.push("/user/login")
       return
     }else{
@@ -47,6 +52,13 @@ axios.interceptors.response.use(
     }
   },
   error => {
+    if (error.response.status==1002) {
+      // 返回 错误代码-1 清除ticket信息并跳转到登录页面
+      cookie.delete("token");
+      console.log("登陆信息失效")
+      alert("登陆信息失效，请重新登陆")
+      router.push("/user/login")
+    }
     return Promise.reject(error.response)   // 返回接口返回的错误信息
   });
 //----------------------------------------------------------

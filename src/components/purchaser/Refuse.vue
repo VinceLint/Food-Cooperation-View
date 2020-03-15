@@ -99,7 +99,6 @@
             console.log('出错啦')
             console.log(error)
             // 根据返回error打的，有点乱
-            // alert(error.data.errors[0].defaultMessage)
           })
       },
       overviewReason (row) {

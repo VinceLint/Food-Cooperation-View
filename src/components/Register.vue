@@ -37,11 +37,14 @@
     methods: {
       register () {
         const _ts = this
-        this.axios.post('session/user/register', this.registerReq)
+        this.axios.post('user-session/user/register', this.registerReq)
           .then(function (response) {
             console.log(response.data.status)
             if (response.data.status == 1001) {
-              console.log('response token: ' + response.data.data.token)
+              _ts.$message({
+                type: 'success',
+                message: '注册成功',
+              })
               _ts.registerSuccess()
             } else {
               alert(response.data.message)
@@ -50,15 +53,13 @@
           .catch(function (error) {
             console.log('出错啦')
             console.log(error)
-            // 根据返回error打的，有点乱
-            alert(error.data.errors[0].defaultMessage)
           })
       },
       registerSuccess () {
         this.$router.push('/user/login')
       },
       cancel () {
-        this.$router.push("/food/home")
+        this.$router.push("/user/login")
       }
     }
 
