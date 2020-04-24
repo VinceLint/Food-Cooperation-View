@@ -4,7 +4,8 @@
       <el-button @click="goToPublish">我要发布</el-button>
     </div>
     <div class="table-contain">
-      <el-table :data="requestRes.details" @row-click="detail" show-overflow-tooltip style="width: 100%; minHeight: 500px;">
+      <el-table :data="requestRes.details" @row-click="detail" show-overflow-tooltip
+                style="width: 100%; minHeight: 500px;">
         <el-table-column prop="id" label="id" v-if="false"></el-table-column>
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="company" label="单位" width="200px"></el-table-column>
@@ -29,6 +30,47 @@
       >
       </el-pagination>
     </div>
+<!--    <el-dialog :visible.async="true">-->
+<!--      <div>-->
+<!--        <span>-->
+<!--          您的个人信息不完善，无法发布合作信息，请先完善公司信息-->
+<!--        </span>-->
+<!--        <el-form :inline="true" label-width="100px" class="formClass">-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item label="企业代码">-->
+<!--              <el-input style="width: 200px"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item label="企业名称">-->
+<!--              <el-input style="width: 200px"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item label="省份">-->
+<!--              <el-input style="width: 200px"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item label="城市">-->
+<!--              <el-input style="width: 200px"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item label="详细地址">-->
+<!--              <el-input type="textarea" :rows="3" style="width: 200px"></el-input>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+<!--          <el-row class="rowClass">-->
+<!--            <el-form-item>-->
+<!--              <el-button type="primary">提 交</el-button>-->
+<!--              <el-button type="danger">取 消</el-button>-->
+<!--            </el-form-item>-->
+<!--          </el-row>-->
+
+<!--        </el-form>-->
+<!--      </div>-->
+<!--    </el-dialog>-->
   </div>
 
 </template>
@@ -36,7 +78,7 @@
 <script>
   export default {
     name: 'Message',
-    data () {
+    data() {
       return {
         requestRes: {
           page: 1,
@@ -58,12 +100,12 @@
       }
     },
     methods: {
-      goToPublish () {
+      goToPublish() {
         this.$router.push('/food/publish')
       },
-      requestMeta () {
+      requestMeta() {
       },
-      requestData (page, pageSize) {
+      requestData(page, pageSize) {
         const _ts = this
         this.axios.get('user-cooperation/cooperation/listCommonMsg',
           {
@@ -91,7 +133,7 @@
             // alert(error.data.errors[0].defaultMessage)
           })
       },
-      detail (row) {
+      detail(row) {
         this.$router.push({
           path: '/food/messageDetail',
           query: {
@@ -101,15 +143,15 @@
         })
       },
       // --------------------页码编辑----------------------------
-      handleSizeChange (val) {
+      handleSizeChange(val) {
         this.requestData(1, val)
       },
-      handleCurrentChange (val) {
+      handleCurrentChange(val) {
         this.requestData(val, this.requestRes.limit)
       },
       // -------------------------------------------------------
     },
-    created () {
+    created() {
       this.requestMeta()
       this.requestData(this.requestRes.page, this.requestRes.limit)
     },
